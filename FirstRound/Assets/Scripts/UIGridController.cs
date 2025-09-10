@@ -11,18 +11,38 @@ public class UIGridController : MonoBehaviour
 
     [Header("PRIVATE VARIABLES")]
     private Image image;
+    private List<int> indexValue = new List<int>();
+//    private int index;
     private void Start()
     {
         // get image and gridlayout group components
         image = GetComponent<Image>();
         if (gridLayout == null)
             gridLayout = GetComponent<GridLayoutGroup>();
-
+        RandomizeList(itemCount);
         ArrangeRectLayout(itemCount);
+    }
+
+    // create a randomized list using shuffle 
+    private void RandomizeList(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            indexValue.Add(i);
+        }
+        for (int i = 0; i < count; i++)
+        {
+            int temp = indexValue[i];
+            int item = Random.Range(i, count);
+            indexValue[i] = indexValue[item];
+            indexValue[item] = temp;
+        }
     }
 
     public void ArrangeRectLayout(int count)
     {
+
+
         // get the columns of the rectangle from the item count
         int cols = Mathf.CeilToInt(Mathf.Sqrt(count));
    //     int rows = Mathf.CeilToInt((float)count / cols);
@@ -47,7 +67,7 @@ public class UIGridController : MonoBehaviour
         // put the images in side the grid
         for (int i = 0; i < count; i++)
         {
-            GameObject go = Instantiate(uiItemPrefabs[i], gridLayout.transform);
+            GameObject go = Instantiate(uiItemPrefabs[indexValue[i]], gridLayout.transform);
             RectTransform rect = go.GetComponent<RectTransform>();
             rect.localScale = Vector3.one;
         }
