@@ -1,35 +1,49 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIGridController : MonoBehaviour
+
+public class UIGridController : MonoBehaviour 
 {
     [Header("PUBLIC VARIABLES")]
     public GridLayoutGroup gridLayout;
     public List<GameObject> uiItemPrefabs;
     public int itemCount = 8;
+ 
 
     [Header("PRIVATE VARIABLES")]
     private Image image;
     private List<int> indexValue = new List<int>();
+    private List<int> tempList = new List<int>();
+
+    private int halfItem;
 //    private int index;
     private void Start()
     {
+        halfItem = itemCount / 2;
         // get image and gridlayout group components
         image = GetComponent<Image>();
         if (gridLayout == null)
             gridLayout = GetComponent<GridLayoutGroup>();
+        ReapeatList(halfItem);
         RandomizeList(itemCount);
         ArrangeRectLayout(itemCount);
     }
 
-    // create a randomized list using shuffle 
-    private void RandomizeList(int count)
+    // fill the index twice on the list to complete the full capacity
+    private void ReapeatList(int count)
     {
+        indexValue.Capacity = 2 * count;
         for (int i = 0; i < count; i++)
         {
             indexValue.Add(i);
+            indexValue.Add(i);
         }
+    }
+    // create a randomized list using shuffle 
+    private void RandomizeList(int count)
+    {
         for (int i = 0; i < count; i++)
         {
             int temp = indexValue[i];

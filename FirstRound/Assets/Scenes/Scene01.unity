@@ -308,6 +308,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &543593399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543593401}
+  - component: {fileID: 543593400}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &543593400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543593399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c4be56605e7574fb27b96c927eda1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfImages: 0
+--- !u!4 &543593401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543593399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1395178037
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,4 +547,14 @@ MonoBehaviour:
   - {fileID: 4942987877891331501, guid: 03dff039bda1e3f4893c13d185394c91, type: 3}
   - {fileID: 4942987877891331501, guid: ad50a5e2864f18648b8a01bf69858cc9, type: 3}
   - {fileID: 4942987877891331501, guid: 9dd14556dd959b241906d07f205f6a92, type: 3}
-  itemCount: 8
+  - {fileID: 4942987877891331501, guid: cd361bcdd22b9804b93a017eacae8332, type: 3}
+  - {fileID: 4942987877891331501, guid: b6a210a3a275fff4183fd53407569cf6, type: 3}
+  - {fileID: 4942987877891331501, guid: 028b09ada28f1a040ae5d34a3317aa78, type: 3}
+  - {fileID: 4942987877891331501, guid: a5fe5df9dd8b71c45b03c30fbe7e2e21, type: 3}
+  - {fileID: 4942987877891331501, guid: 1f47b57802147a2488f9f1c2af7b2107, type: 3}
+  - {fileID: 4942987877891331501, guid: e450840020610814da52d06e0f0816b0, type: 3}
+  - {fileID: 4942987877891331501, guid: 400ac00c5f0036649afbe63dd7a03663, type: 3}
+  - {fileID: 4942987877891331501, guid: 8fc92669ae00a4648a08578496dd24ab, type: 3}
+  - {fileID: 4942987877891331501, guid: 540e2aaa80b61ab45bab239b779e8062, type: 3}
+  - {fileID: 4942987877891331501, guid: c68bfc71d03ffb841894783fa92ac74e, type: 3}
+  itemCount: 40

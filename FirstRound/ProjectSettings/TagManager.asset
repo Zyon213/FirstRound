@@ -3,7 +3,28 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Beaver
+  - Bird
+  - Chicken
+  - Crock
+  - Crow
+  - Dance
+  - Duck
+  - Elephant
+  - Fox
+  - Leopard
+  - Lion
+  - Mantle
+  - Panda
+  - Parrot
+  - Pig
+  - Rabit
+  - Snail
+  - Tiger
+  - Tortous
+  - Turtle
+  - CardBack
   layers:
   - Default
   - TransparentFX
