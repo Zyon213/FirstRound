@@ -244,3 +244,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frontImage: {fileID: 1038693968856175010}
+  backImage: {fileID: 8728980494479142444}

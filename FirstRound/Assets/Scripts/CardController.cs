@@ -8,45 +8,36 @@ public class CardController : MonoBehaviour, IPointerClickHandler
 {
     [Header("PUBLIC VARIALBES")]
     public Image frontImage;
-    private float flipDelay = 2.0f;
+    public Image backImage;
 
-    [Header("PRIVATE VARIABLES")]
-    private bool isClicked;
-    private Image backImage;
     private void Start()
     {
         frontImage = GetComponent<Image>();
-     //   backImage = GetComponent<Image>();
     }
+    // uisng onpointerclick method access the image that is clicked from the pointerEventData
+    // and can access the game object using pointer currentRaycast but you must enable the raycast
+    // on the image.
     public void OnPointerClick(PointerEventData eventData)
-    { 
-        
+    {
+        if (GameManager.Instance.numberOfClicks >= 2)
+            return;
+
+        // get the gameobject from the eventData
         GameObject imageObject = eventData.pointerCurrentRaycast.gameObject;
-        if (imageObject != null && !isClicked)
+        if (imageObject != null )
         {
-            Debug.Log(++GameManager.Instance.numberOfImages);
-            isClicked = true;
-            backImage = imageObject.GetComponentInChildren<Image>();
-         //   frontImage = imageObject.GetComponentInChildren<Image>();
-            Debug.Log(frontImage.name);
+            // check if the backImage tack is cardback add the tag of the front image into the
+            // tags list for comparision.
             if (backImage != null && backImage.CompareTag("CardBack"))
             {
                 backImage.enabled = false;
-                if (frontImage.CompareTag("Beaver"))
+                GameManager.Instance.tags.Add(frontImage.gameObject.tag);
+                ++GameManager.Instance.numberOfClicks;
+                if (GameManager.Instance.numberOfClicks == 2)
                 {
-                    Debug.Log("Success");
+                    StartCoroutine(GameManager.Instance.CheckMatch());
                 }
-                else
-                    StartCoroutine(FlipCardDelay(flipDelay));
-
             }
         }
-    }
-
-    IEnumerator FlipCardDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        backImage.enabled = true;
-        isClicked = false;
     }
 }

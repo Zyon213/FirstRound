@@ -14,8 +14,7 @@ public class UIGridController : MonoBehaviour
 
     [Header("PRIVATE VARIABLES")]
     private Image image;
-    private List<int> indexValue = new List<int>();
-    private List<int> tempList = new List<int>();
+    private List<int> indexValue = new();
 
     private int halfItem;
 //    private int index;
@@ -59,25 +58,25 @@ public class UIGridController : MonoBehaviour
 
         // get the columns of the rectangle from the item count
         int cols = Mathf.CeilToInt(Mathf.Sqrt(count));
-   //     int rows = Mathf.CeilToInt((float)count / cols);
+        //     int rows = Mathf.CeilToInt((float)count / cols);
 
-         // get the width of the image
+        // get the width of the image
         float width = image.rectTransform.rect.width;
-        
+
         // get the spacing of the gridlayout
         float xSPacing = gridLayout.spacing.x;
 
         // calculate the size of the cell 
         float imageSize = (width / cols) - (2 * xSPacing);
 
-         // set the cell size 
+        // set the cell size 
         gridLayout.cellSize = new Vector2(imageSize, imageSize);
 
         // create rectangle with a fixed column
 
         gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         gridLayout.constraintCount = cols;
- 
+
         // put the images in side the grid
         for (int i = 0; i < count; i++)
         {
@@ -85,6 +84,5 @@ public class UIGridController : MonoBehaviour
             RectTransform rect = go.GetComponent<RectTransform>();
             rect.localScale = Vector3.one;
         }
-    }
-
+    } 
 }

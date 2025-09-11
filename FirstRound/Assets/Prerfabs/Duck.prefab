@@ -243,4 +243,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6fa6d55a5d237b419b3b92bc21df28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontImage: {fileID: 0}
+  frontImage: {fileID: 1038693968856175010}
+  backImage: {fileID: 3088726941794616262}
