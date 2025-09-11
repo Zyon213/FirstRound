@@ -13,7 +13,6 @@ public class CardController : MonoBehaviour, IPointerClickHandler
     private void Start()
     {
         frontImage = GetComponent<Image>();
-        frontImage.rectTransform.sizeDelta = new Vector2(200, 200);
     }
     // uisng onpointerclick method access the image that is clicked from the pointerEventData
     // and can access the game object using pointer currentRaycast but you must enable the raycast

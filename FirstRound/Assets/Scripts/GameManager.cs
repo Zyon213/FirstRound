@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
@@ -15,20 +18,53 @@ public class GameManager : MonoBehaviour
     public int numberOfAttempts = 0;
     public List<string> tags = new();
     public int itemCount;
+    public Text match;
+    public Text attempt;
+    public GameObject pausePage;
+    public GameObject gameOverPage;
+    public GameObject winPage;
+    public int winPoint;
 
     [Header("PRIVATE VARIABLES")]
-    private float delay = 1.0f;
+    private float delay = 0.50f;
+    // set this value to show the game over page functionality 
+    // it will restrict the number of attempts for bigger itemcounts
+    private int attempts = 10;
+
+
     private void Start()
     {
-        if (Instance != null && Instance != this)
-            Destroy(this.gameObject);
-        else
-        {
+        if (Instance == null)
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
+        else if (Instance != this)
+            Destroy(gameObject);
     }
 
+    public void ResetGame()
+    {
+        tags.Clear();
+        isClicked = false;
+        numberOfClicks = 0;
+        numberOfMatches = 0;
+        numberOfAttempts = 0;
+        pausePage.gameObject.SetActive(false);
+        gameOverPage.gameObject.SetActive(false);
+        winPage.gameObject.SetActive(false);
+    }
+    private void Update()
+    {
+        if (numberOfAttempts > attempts)
+        {
+            gameOverPage.gameObject.SetActive(true);
+            numberOfAttempts = 0;
+        }
+        Debug.Log("winpoint " + winPoint  + " number of matches " + numberOfMatches);
+        if (numberOfMatches > 0 && numberOfMatches == winPoint)
+        {
+            winPage.gameObject.SetActive(true);
+            Debug.Log("winn");
+        }
+    }
     public IEnumerator CheckMatch()
     {
         yield return new WaitForSeconds(delay);
@@ -49,7 +85,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             ++numberOfMatches;
-            Debug.Log(numberOfMatches);
+
         }
         else
         {
@@ -59,10 +95,43 @@ public class GameManager : MonoBehaviour
                     card.backImage.enabled = true;
             }
             ++numberOfAttempts;
-            Debug.Log(numberOfAttempts);
         }
         tags.Clear();
+        UpdateScore();
         numberOfClicks = 0;
+    }
+
+    public void UpdateScore()
+    {
+        match.text = numberOfMatches.ToString();
+        attempt.text = numberOfAttempts.ToString();
+    }
+    public void PauseGame()
+    {
+        Time.timeScale = 0.0f;
+        pausePage.gameObject.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale += 1.0f;
+        pausePage.gameObject.SetActive(false);
+
+    }
+
+    public void WinPage()
+    {
+        winPage.gameObject.SetActive(true);
+    }
+    public void HomePage()
+    {
+        SceneManager.LoadScene("StartPage", LoadSceneMode.Single);
+        ResetGame();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
 }

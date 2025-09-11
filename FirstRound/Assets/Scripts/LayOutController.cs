@@ -9,36 +9,38 @@ public class LayOutController : MonoBehaviour
     public GameObject layoutCanvas;
     public GameObject gameCanvas;
 
-    [Header("PRIVATE VARIABLES")]
-    private Button button;
+//    [Header("PRIVATE VARIABLES")]
     void Start()
     {
-        layoutCanvas.gameObject.SetActive(true);
-        gameCanvas.gameObject.SetActive(false);
+        layoutCanvas.SetActive(true);
+        gameCanvas.SetActive(false);
     }
 
+    // on layout button click disable the layout page and enable the game page
+    // and initialize call InitializeItems method to initialize the itemcounts and others methods
     public void LayoutOne()
     {
-        GameManager.Instance.itemCount = 6;
-        gameCanvas.gameObject.SetActive(true);
-        layoutCanvas.gameObject.SetActive(false);
+        UpdatePage(6);
     }
     public void LayoutTwo()
     {
-        GameManager.Instance.itemCount = 12;
-        gameCanvas.gameObject.SetActive(true);
-        layoutCanvas.gameObject.SetActive(false);
+        UpdatePage(12);
     }
     public void LayoutThree()
     {
-        GameManager.Instance.itemCount = 20;
-        gameCanvas.gameObject.SetActive(true);
-        layoutCanvas.gameObject.SetActive(false);
+        UpdatePage(20);
     }
     public void LayoutFour()
     {
-        GameManager.Instance.itemCount = 30;
-        gameCanvas.gameObject.SetActive(true);
-        layoutCanvas.gameObject.SetActive(false);
+        UpdatePage(30);
+    }
+
+    private void UpdatePage(int count)
+    {
+        GameManager.Instance.itemCount = count;
+        gameCanvas.SetActive(true);
+        layoutCanvas.SetActive(false);
+        gameCanvas.GetComponentInChildren<UIGridController>().InitializeItems();
+        GameManager.Instance.winPoint = count / 2;
     }
 }

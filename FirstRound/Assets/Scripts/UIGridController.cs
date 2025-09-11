@@ -21,17 +21,21 @@ public class UIGridController : MonoBehaviour
 //    private int index;
     private void Start()
     {
-        itemCount = GameManager.Instance.itemCount;
-        halfItem = itemCount / 2;
         // get image and gridlayout group components
         image = GetComponent<Image>();
         if (gridLayout == null)
             gridLayout = GetComponent<GridLayoutGroup>();
+    }
+
+    public void InitializeItems()
+    {
+        itemCount = GameManager.Instance.itemCount;
+        halfItem = itemCount / 2;
+  
         ReapeatList(halfItem);
         RandomizeList(itemCount);
         ArrangeRectLayout(itemCount);
     }
-
     // fill the index twice on the list to complete the full capacity
     private void ReapeatList(int count)
     {
