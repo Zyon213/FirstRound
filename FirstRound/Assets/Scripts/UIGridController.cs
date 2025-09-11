@@ -9,18 +9,19 @@ public class UIGridController : MonoBehaviour
     [Header("PUBLIC VARIABLES")]
     public GridLayoutGroup gridLayout;
     public List<GameObject> uiItemPrefabs;
-    public int itemCount;
  
 
     [Header("PRIVATE VARIABLES")]
     private float imageSize;
     private Image image;
     private List<int> indexValue = new();
+    private int itemCount;
 
     private int halfItem;
 //    private int index;
     private void Start()
     {
+        itemCount = GameManager.Instance.itemCount;
         halfItem = itemCount / 2;
         // get image and gridlayout group components
         image = GetComponent<Image>();

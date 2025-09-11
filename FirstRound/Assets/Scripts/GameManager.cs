@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int numberOfMatches = 0;
     public int numberOfAttempts = 0;
     public List<string> tags = new();
+    public int itemCount;
 
     [Header("PRIVATE VARIABLES")]
     private float delay = 1.0f;
