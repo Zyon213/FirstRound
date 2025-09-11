@@ -340,6 +340,8 @@ MonoBehaviour:
   numberOfImages: 0
   isClicked: 0
   numberOfClicks: 0
+  numberOfMatches: 0
+  numberOfAttempts: 0
   tags: []
 --- !u!4 &543593401
 Transform:
@@ -560,4 +562,4 @@ MonoBehaviour:
   - {fileID: 4942987877891331501, guid: 8fc92669ae00a4648a08578496dd24ab, type: 3}
   - {fileID: 4942987877891331501, guid: 540e2aaa80b61ab45bab239b779e8062, type: 3}
   - {fileID: 4942987877891331501, guid: c68bfc71d03ffb841894783fa92ac74e, type: 3}
-  itemCount: 8
+  itemCount: 6

@@ -9,10 +9,11 @@ public class UIGridController : MonoBehaviour
     [Header("PUBLIC VARIABLES")]
     public GridLayoutGroup gridLayout;
     public List<GameObject> uiItemPrefabs;
-    public int itemCount = 8;
+    public int itemCount;
  
 
     [Header("PRIVATE VARIABLES")]
+    private float imageSize;
     private Image image;
     private List<int> indexValue = new();
 
@@ -51,7 +52,6 @@ public class UIGridController : MonoBehaviour
             indexValue[item] = temp;
         }
     }
-
     public void ArrangeRectLayout(int count)
     {
 
@@ -67,7 +67,8 @@ public class UIGridController : MonoBehaviour
         float xSPacing = gridLayout.spacing.x;
 
         // calculate the size of the cell 
-        float imageSize = (width / cols) - (2 * xSPacing);
+        imageSize = (width / cols) - (2 * xSPacing);
+
 
         // set the cell size 
         gridLayout.cellSize = new Vector2(imageSize, imageSize);

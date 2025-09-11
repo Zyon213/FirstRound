@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public int numberOfImages = 0;
     public bool isClicked = false;
     public int numberOfClicks = 0;
+    public int numberOfMatches = 0;
+    public int numberOfAttempts = 0;
     public List<string> tags = new();
 
     [Header("PRIVATE VARIABLES")]
@@ -45,6 +47,8 @@ public class GameManager : MonoBehaviour
                     card.backImage.color = temp ;
                 }
             }
+            ++numberOfMatches;
+            Debug.Log(numberOfMatches);
         }
         else
         {
@@ -53,6 +57,8 @@ public class GameManager : MonoBehaviour
                 if (!card.backImage.enabled)
                     card.backImage.enabled = true;
             }
+            ++numberOfAttempts;
+            Debug.Log(numberOfAttempts);
         }
         tags.Clear();
         numberOfClicks = 0;
