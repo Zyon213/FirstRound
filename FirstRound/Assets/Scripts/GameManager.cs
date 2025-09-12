@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public int itemCount;
     public Text match;
     public Text attempt;
+    public Text highScoreText;
     public GameObject pausePage;
     public GameObject gameOverPage;
     public GameObject winPage;
@@ -27,10 +29,13 @@ public class GameManager : MonoBehaviour
 
     [Header("PRIVATE VARIABLES")]
     private float delay = 0.50f;
+ //   private DataController dataController;
+    private SaveManager saveManager;
+    public int highScore = 0;
+
     // set this value to show the game over page functionality 
     // it will restrict the number of attempts for bigger itemcounts
     private int attempts = 10;
-
 
     private void Start()
     {
@@ -38,6 +43,15 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else if (Instance != this)
             Destroy(gameObject);
+
+
+        saveManager = FindObjectOfType<SaveManager>();
+        if (saveManager == null)
+            Debug.Log("data controller not found");
+
+        LoadHighScore();
+        ShowHighScore();
+
     }
 
     public void ResetGame()
@@ -58,11 +72,9 @@ public class GameManager : MonoBehaviour
             gameOverPage.gameObject.SetActive(true);
             numberOfAttempts = 0;
         }
-        Debug.Log("winpoint " + winPoint  + " number of matches " + numberOfMatches);
         if (numberOfMatches > 0 && numberOfMatches == winPoint)
         {
             winPage.gameObject.SetActive(true);
-            Debug.Log("winn");
         }
     }
     public IEnumerator CheckMatch()
@@ -85,6 +97,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             ++numberOfMatches;
+            ++highScore;
 
         }
         else
@@ -106,6 +119,29 @@ public class GameManager : MonoBehaviour
         match.text = numberOfMatches.ToString();
         attempt.text = numberOfAttempts.ToString();
     }
+
+    public void ShowHighScore()
+    {
+        highScoreText.text = highScore.ToString();
+    }
+
+    public void SaveHighScore()
+    {
+        DataController data = new DataController();
+        if (this.highScore > data.highScore)
+        {
+            data.highScore = this.highScore;
+        }
+        saveManager.SaveGame(data);
+     //   this.highScore = 0;
+    }
+
+    public void LoadHighScore()
+    {
+        DataController data = saveManager.LoadGame();
+        if (data != null)
+            this.highScore = data.highScore;
+    }
     public void PauseGame()
     {
         Time.timeScale = 0.0f;
@@ -125,12 +161,15 @@ public class GameManager : MonoBehaviour
     }
     public void HomePage()
     {
+        LoadHighScore();
         SceneManager.LoadScene("StartPage", LoadSceneMode.Single);
-        ResetGame();
+        numberOfMatches = 0;
+        numberOfAttempts = 0;
     }
 
     public void QuitGame()
     {
+        SaveHighScore();
         Application.Quit();
     }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class UIGridController : MonoBehaviour
     private Image image;
     private List<int> indexValue = new();
     private int itemCount;
+    private float revealDelay = 1.0f;
 
     private int halfItem;
 //    private int index;
@@ -35,6 +37,8 @@ public class UIGridController : MonoBehaviour
         ReapeatList(halfItem);
         RandomizeList(itemCount);
         ArrangeRectLayout(itemCount);
+        StartCoroutine(RevealImages());
+        HideImages();
     }
     // fill the index twice on the list to complete the full capacity
     private void ReapeatList(int count)
@@ -91,4 +95,28 @@ public class UIGridController : MonoBehaviour
             rect.localScale = Vector3.one;
         }
     } 
+
+    // reveal the images for 1 second 
+    IEnumerator RevealImages()
+    {
+        yield return new WaitForSeconds(revealDelay);
+        foreach (var card in FindObjectsOfType<CardController>())
+        {
+            if (card.backImage.enabled == false)
+            {
+                card.backImage.enabled = true;
+            }
+        }
+    }
+   // hide the images with back image
+    public void HideImages()
+    { 
+        foreach (var card in FindObjectsOfType<CardController>())
+        {
+            if (card.backImage.enabled == true)
+            {
+                card.backImage.enabled = false;
+            }
+        }
+    }
 }
